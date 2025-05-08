@@ -1,6 +1,7 @@
 import 'package:dart_web_scraper/common/utils/http.dart';
 import 'package:dart_web_scraper/dart_web_scraper.dart';
 import 'package:dart_web_scraper/dart_web_scraper/parsers/exports.dart';
+import 'package:dart_web_scraper/dart_web_scraper/parsers/json_list_parser.dart';
 
 /// Used for parsing data from scraped HTML.
 class WebParser {
@@ -369,6 +370,12 @@ class WebParser {
         );
       case ParserType.jsonld:
         return jsonLdParser(
+          parser: parser,
+          parentData: parentData,
+          debug: debug,
+        );
+      case ParserType.jsonList:
+        return jsonListParser(
           parser: parser,
           parentData: parentData,
           debug: debug,

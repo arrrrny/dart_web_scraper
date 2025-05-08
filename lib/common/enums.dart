@@ -21,6 +21,7 @@ enum ParserType {
   http,
   json,
   jsonld,
+  jsonList,
   jsonTable,
   json5decode,
   staticVal,
