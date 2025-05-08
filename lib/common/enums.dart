@@ -26,6 +26,7 @@ enum ParserType {
   json5decode,
   staticVal,
   returnUrlParser,
+  metaTag
 }
 
 /// HTTP Methods for HttpParser

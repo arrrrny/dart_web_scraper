@@ -2,6 +2,7 @@ import 'package:dart_web_scraper/common/utils/http.dart';
 import 'package:dart_web_scraper/dart_web_scraper.dart';
 import 'package:dart_web_scraper/dart_web_scraper/parsers/exports.dart';
 import 'package:dart_web_scraper/dart_web_scraper/parsers/json_list_parser.dart';
+import 'package:dart_web_scraper/dart_web_scraper/parsers/meta_tag_parser.dart';
 
 /// Used for parsing data from scraped HTML.
 class WebParser {
@@ -422,6 +423,12 @@ class WebParser {
         );
       case ParserType.returnUrlParser:
         return returnUrlParser(
+          parser: parser,
+          parentData: parentData,
+          debug: debug,
+        );
+      case ParserType.metaTag:
+        return metaTagParser(
           parser: parser,
           parentData: parentData,
           debug: debug,
