@@ -29,7 +29,7 @@ Data? jsonListParser({
   List<Map<String, dynamic>> results = [];
 
   List<Element> selector = document
-      .querySelectorAll('*')
+      .querySelectorAll('script')
       .where((tag) => tag.attributes['type'] != 'application/ld+json')
       .toList();
   if (selector.isNotEmpty) {
