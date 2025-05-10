@@ -39,6 +39,8 @@ class WebScraper {
     HttpClientType clientType = HttpClientType.browserClient,
     ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
     CurlClientOptions curlClientOptions = const CurlClientOptions(),
+    HttpMethod method = HttpMethod.get,
+    Object? body,
   }) async {
     /// Fetch config and target
     Config? config = getConfig(
@@ -69,6 +71,8 @@ class WebScraper {
       clientType: clientType,
       consoleClientOptions: consoleClientOptions,
       curlClientOptions: curlClientOptions,
+      method: method,
+      body: body,
     );
 
     /// Parse HTML
@@ -84,6 +88,8 @@ class WebScraper {
       clientType: clientType,
       consoleClientOptions: consoleClientOptions,
       curlClientOptions: curlClientOptions,
+      method: method,
+      body: body,
     );
 
     return parsedData;

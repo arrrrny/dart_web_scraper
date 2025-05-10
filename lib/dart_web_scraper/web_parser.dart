@@ -19,6 +19,8 @@ class WebParser {
     HttpClientType clientType = HttpClientType.browserClient,
     ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
     CurlClientOptions curlClientOptions = const CurlClientOptions(),
+    HttpMethod method = HttpMethod.get,
+    Object? body,
   }) async {
     /// Start the stopwatch
     final Stopwatch stopwatch = Stopwatch()..start();
@@ -60,6 +62,8 @@ class WebParser {
       clientType: clientType,
       consoleClientOptions: consoleClientOptions,
       curlClientOptions: curlClientOptions,
+      method: method,
+      body: body,
     );
 
     // Ensure 'url' is present in parsedData
@@ -102,6 +106,8 @@ class WebParser {
     HttpClientType clientType = HttpClientType.browserClient,
     ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
     CurlClientOptions curlClientOptions = const CurlClientOptions(),
+    HttpMethod method = HttpMethod.get,
+    Object? body,
   }) async {
     final Map<String, Object> parsedData = {};
     final List<String> privateIds = [];
@@ -129,6 +135,8 @@ class WebParser {
           clientType: clientType,
           consoleClientOptions: consoleClientOptions,
           curlClientOptions: curlClientOptions,
+          method: method,
+          body: body,
         );
 
         if (data != null) {
@@ -169,6 +177,8 @@ class WebParser {
                     clientType: clientType,
                     consoleClientOptions: consoleClientOptions,
                     curlClientOptions: curlClientOptions,
+                    method: method,
+                    body: body,
                   );
 
                   if (childrenResults.isNotEmpty) {
@@ -200,6 +210,8 @@ class WebParser {
                 clientType: clientType,
                 consoleClientOptions: consoleClientOptions,
                 curlClientOptions: curlClientOptions,
+                method: method,
+                body: body,
               );
 
               if (childResult.isNotEmpty) {
@@ -243,6 +255,8 @@ class WebParser {
     HttpClientType clientType = HttpClientType.browserClient,
     ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
     CurlClientOptions curlClientOptions = const CurlClientOptions(),
+    HttpMethod method = HttpMethod.get,
+    Object? body,
   }) async {
     final Data? parsed = await _runParser(
       parser: parser,
@@ -254,6 +268,8 @@ class WebParser {
       clientType: clientType,
       consoleClientOptions: consoleClientOptions,
       curlClientOptions: curlClientOptions,
+      method: method,
+      body: body,
     );
 
     if (parsed != null) {
@@ -305,6 +321,8 @@ class WebParser {
     HttpClientType clientType = HttpClientType.browserClient,
     ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
     CurlClientOptions curlClientOptions = const CurlClientOptions(),
+    HttpMethod method = HttpMethod.get,
+    Object? body,
   }) async {
     switch (parser.type) {
       case ParserType.element:
