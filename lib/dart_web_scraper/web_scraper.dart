@@ -66,6 +66,9 @@ class WebScraper {
       userAgent: userAgent,
       proxyAPI: proxyAPI,
       proxyUrlParam: proxyUrlParam,
+      clientType: clientType,
+      consoleClientOptions: consoleClientOptions,
+      curlClientOptions: curlClientOptions,
     );
 
     /// Parse HTML

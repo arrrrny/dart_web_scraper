@@ -17,6 +17,9 @@ class Scraper {
     Uri? proxyAPI,
     String? proxyUrlParam,
     bool debug = false,
+    HttpClientType clientType = HttpClientType.browserClient,
+    ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
+    CurlClientOptions curlClientOptions = const CurlClientOptions(),
   }) async {
     /// Fetch target
     UrlTarget? target = fetchTarget(config.urlTargets, url);
@@ -100,6 +103,9 @@ class Scraper {
           debug: debug,
           proxyAPI: proxyAPI,
           proxyUrlParam: proxyUrlParam,
+          clientType: clientType,
+          consoleClientOptions: consoleClientOptions,
+          curlClientOptions: curlClientOptions,
         );
       } else if (config.usePassedHtml && html != null && html.hasContent()) {
         printLog(
@@ -116,6 +122,9 @@ class Scraper {
           debug: debug,
           proxyAPI: proxyAPI,
           proxyUrlParam: proxyUrlParam,
+          clientType: clientType,
+          consoleClientOptions: consoleClientOptions,
+          curlClientOptions: curlClientOptions,
         );
       }
       if (dom.obj != "") {
