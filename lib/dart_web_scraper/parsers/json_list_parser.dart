@@ -46,7 +46,7 @@ Data? jsonListParser({
 
 List<Map<String, dynamic>> _extractFromElements(List<Element> elements) {
   RegExp jsonRegExp = RegExp(
-    r'\{.*\}',
+    r'\{.*?\}',
     dotAll: true,
   );
   List<Map<String, dynamic>> jsonDataList = [];
