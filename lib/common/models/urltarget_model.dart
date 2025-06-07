@@ -24,7 +24,7 @@ class UrlTarget {
   /// Creates a UrlTarget instance from a JSON map.
   factory UrlTarget.fromJson(Map<String, dynamic> json) {
     return UrlTarget(
-      name: json['name'],
+      name: json['name'] as String,
       where: List<String>.from(json['where']),
       needsHtml: json['needsHtml'] ?? true,
       urlCleaner: json['urlCleaner'] != null
