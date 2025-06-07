@@ -54,8 +54,8 @@ class Parser {
     this.isPrivate = false,
     this.multiple = false,
     this.optional,
-  }) : cleanerName = cleanerName,
-       cleaner = null; // Will be resolved from registry when needed
+  })  : cleanerName = cleanerName,
+        cleaner = null; // Will be resolved from registry when needed
 
   /// Get the cleaner function from registry if cleanerName is set
   CleanerFunction? get resolvedCleaner {
@@ -69,13 +69,16 @@ class Parser {
       parent: List<String>.from(json['parent']),
       type: ParserType.values.firstWhere(
         (e) => e.toString() == 'ParserType.${json['type']}',
-        orElse: () => throw ArgumentError('Invalid ParserType: ${json['type']}'),
-        orElse: () => ParserType.defaultValue,
+        orElse: () =>
+            throw ArgumentError('Invalid ParserType: ${json['type']}'),
       ),
-      selector: json['selector'] != null ? List<String>.from(json['selector']) : const [],
+      selector: json['selector'] != null
+          ? List<String>.from(json['selector'])
+          : const [],
       isPrivate: json['isPrivate'] ?? false,
       multiple: json['multiple'] ?? false,
-      optional: json['optional'] != null ? Optional.fromJson(json['optional']) : null,
+      optional:
+          json['optional'] != null ? Optional.fromJson(json['optional']) : null,
       cleanerName: json['cleanerName'],
       // Note: cleaner function will be resolved from registry using cleanerName
     );

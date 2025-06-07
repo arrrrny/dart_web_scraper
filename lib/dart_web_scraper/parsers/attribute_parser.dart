@@ -2,6 +2,8 @@ import 'package:dart_web_scraper/common/utils/data_extraction.dart';
 import 'package:html/dom.dart';
 import 'package:dart_web_scraper/dart_web_scraper.dart';
 
+const String SELF_SELECTOR = '_self';
+
 Data? attributeParser({
   required Parser parser,
   required Data parentData,
@@ -79,9 +81,11 @@ Object? attrHandler(
       return result;
     }
   } else {
-    Element? selector = source.querySelector(selectr);
+    Element? selector;
     if (selectr == SELF_SELECTOR) {
       selector = source;
+    } else {
+      selector = source.querySelector(selectr);
     }
     if (selector != null) {
       String? attribute = selector.attributes[attr];
