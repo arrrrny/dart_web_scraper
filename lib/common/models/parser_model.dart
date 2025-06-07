@@ -69,6 +69,7 @@ class Parser {
       parent: List<String>.from(json['parent']),
       type: ParserType.values.firstWhere(
         (e) => e.toString() == 'ParserType.${json['type']}',
+        orElse: () => throw ArgumentError('Invalid ParserType: ${json['type']}'),
         orElse: () => ParserType.defaultValue,
       ),
       selector: json['selector'] != null ? List<String>.from(json['selector']) : const [],
