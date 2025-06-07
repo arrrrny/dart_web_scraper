@@ -665,8 +665,8 @@ class Optional {
       apply: json['apply'] != null
           ? ApplyMethod.values.firstWhere(
               (e) => e.toString() == 'ApplyMethod.${json['apply']}',
-              orElse: () => null,
-              orElse: () => ApplyMethod.defaultValue, // Replace with an appropriate default value
+              orElse: () =>
+                  throw ArgumentError('Invalid ParserType: ${json['type']}'),
             )
           : null,
       regex: json['regex'],
@@ -718,7 +718,9 @@ class Optional {
       where: json['where'] != null ? List<String>.from(json['where']) : null,
       siblingDirection: json['siblingDirection'] != null
           ? SiblingDirection.values.firstWhere(
-              (e) => e.toString() == 'SiblingDirection.${json['siblingDirection']}',
+              (e) =>
+                  e.toString() ==
+                  'SiblingDirection.${json['siblingDirection']}',
             )
           : null,
       keys: json['keys'],
