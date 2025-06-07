@@ -80,7 +80,7 @@ Object? attrHandler(
     }
   } else {
     Element? selector = source.querySelector(selectr);
-    if (selectr == '_self') {
+    if (selectr == SELF_SELECTOR) {
       selector = source;
     }
     if (selector != null) {
