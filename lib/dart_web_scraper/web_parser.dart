@@ -16,11 +16,7 @@ class WebParser {
     Map<String, String>? cookies,
     bool debug = false,
     bool concurrentParsing = false,
-    HttpClientType clientType = HttpClientType.browserClient,
-    ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
-    CurlClientOptions curlClientOptions = const CurlClientOptions(),
-    HttpMethod method = HttpMethod.get,
-    Object? body,
+    HttpRequestConfig httpRequestConfig = const HttpRequestConfig(),
   }) async {
     /// Start the stopwatch
     final Stopwatch stopwatch = Stopwatch()..start();
