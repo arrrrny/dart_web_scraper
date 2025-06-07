@@ -1,5 +1,7 @@
+import 'package:dart_web_scraper/common/utils/http.dart';
 import 'package:dart_web_scraper/dart_web_scraper.dart';
 import 'package:dart_web_scraper/dart_web_scraper/parsers/exports.dart';
+import 'package:dart_web_scraper/dart_web_scraper/parsers/meta_tag_parser.dart';
 
 /// Used for parsing data from scraped HTML.
 class WebParser {
@@ -14,6 +16,11 @@ class WebParser {
     Map<String, String>? cookies,
     bool debug = false,
     bool concurrentParsing = false,
+    HttpClientType clientType = HttpClientType.browserClient,
+    ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
+    CurlClientOptions curlClientOptions = const CurlClientOptions(),
+    HttpMethod method = HttpMethod.get,
+    Object? body,
   }) async {
     /// Start the stopwatch
     final Stopwatch stopwatch = Stopwatch()..start();
@@ -52,6 +59,11 @@ class WebParser {
       cookies: cookies,
       debug: debug,
       concurrent: concurrentParsing,
+      clientType: clientType,
+      consoleClientOptions: consoleClientOptions,
+      curlClientOptions: curlClientOptions,
+      method: method,
+      body: body,
     );
 
     // Ensure 'url' is present in parsedData
@@ -91,6 +103,11 @@ class WebParser {
     Map<String, String>? cookies,
     required bool debug,
     required bool concurrent,
+    HttpClientType clientType = HttpClientType.browserClient,
+    ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
+    CurlClientOptions curlClientOptions = const CurlClientOptions(),
+    HttpMethod method = HttpMethod.get,
+    Object? body,
   }) async {
     final Map<String, Object> parsedData = {};
     final List<String> privateIds = [];
@@ -115,6 +132,11 @@ class WebParser {
           proxyUrlParam: proxyUrlParam,
           cookies: cookies,
           debug: debug,
+          clientType: clientType,
+          consoleClientOptions: consoleClientOptions,
+          curlClientOptions: curlClientOptions,
+          method: method,
+          body: body,
         );
 
         if (data != null) {
@@ -152,6 +174,11 @@ class WebParser {
                     cookies: cookies,
                     debug: debug,
                     concurrent: concurrent,
+                    clientType: clientType,
+                    consoleClientOptions: consoleClientOptions,
+                    curlClientOptions: curlClientOptions,
+                    method: method,
+                    body: body,
                   );
 
                   if (childrenResults.isNotEmpty) {
@@ -180,6 +207,11 @@ class WebParser {
                 cookies: cookies,
                 debug: debug,
                 concurrent: concurrent,
+                clientType: clientType,
+                consoleClientOptions: consoleClientOptions,
+                curlClientOptions: curlClientOptions,
+                method: method,
+                body: body,
               );
 
               if (childResult.isNotEmpty) {
@@ -220,6 +252,11 @@ class WebParser {
     required String? proxyUrlParam,
     Map<String, String>? cookies,
     required bool debug,
+    HttpClientType clientType = HttpClientType.browserClient,
+    ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
+    CurlClientOptions curlClientOptions = const CurlClientOptions(),
+    HttpMethod method = HttpMethod.get,
+    Object? body,
   }) async {
     final Data? parsed = await _runParser(
       parser: parser,
@@ -228,6 +265,11 @@ class WebParser {
       proxyUrlParam: proxyUrlParam,
       cookies: cookies,
       debug: debug,
+      clientType: clientType,
+      consoleClientOptions: consoleClientOptions,
+      curlClientOptions: curlClientOptions,
+      method: method,
+      body: body,
     );
 
     if (parsed != null) {
@@ -276,6 +318,11 @@ class WebParser {
     required String? proxyUrlParam,
     Map<String, String>? cookies,
     required bool debug,
+    HttpClientType clientType = HttpClientType.browserClient,
+    ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
+    CurlClientOptions curlClientOptions = const CurlClientOptions(),
+    HttpMethod method = HttpMethod.get,
+    Object? body,
   }) async {
     switch (parser.type) {
       case ParserType.element:
@@ -329,6 +376,9 @@ class WebParser {
           proxyUrlParam: proxyUrlParam,
           cookies: cookies,
           debug: debug,
+          clientType: clientType,
+          consoleClientOptions: consoleClientOptions,
+          curlClientOptions: curlClientOptions,
         );
       case ParserType.strBetween:
         return stringBetweenParser(
@@ -338,6 +388,12 @@ class WebParser {
         );
       case ParserType.jsonld:
         return jsonLdParser(
+          parser: parser,
+          parentData: parentData,
+          debug: debug,
+        );
+      case ParserType.jsonList:
+        return jsonListParser(
           parser: parser,
           parentData: parentData,
           debug: debug,
@@ -384,6 +440,12 @@ class WebParser {
         );
       case ParserType.returnUrlParser:
         return returnUrlParser(
+          parser: parser,
+          parentData: parentData,
+          debug: debug,
+        );
+      case ParserType.metaTag:
+        return metaTagParser(
           parser: parser,
           parentData: parentData,
           debug: debug,

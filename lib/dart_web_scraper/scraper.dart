@@ -17,6 +17,11 @@ class Scraper {
     Uri? proxyAPI,
     String? proxyUrlParam,
     bool debug = false,
+    HttpClientType clientType = HttpClientType.browserClient,
+    ConsoleClientOptions consoleClientOptions = const ConsoleClientOptions(),
+    CurlClientOptions curlClientOptions = const CurlClientOptions(),
+    HttpMethod method = HttpMethod.get,
+    Object? body,
   }) async {
     /// Fetch target
     UrlTarget? target = fetchTarget(config.urlTargets, url);
@@ -94,13 +99,30 @@ class Scraper {
           debug,
           color: LogColor.blue,
         );
-        requestData = await getRequest(
-          url,
-          headers: headersMerged,
-          debug: debug,
-          proxyAPI: proxyAPI,
-          proxyUrlParam: proxyUrlParam,
-        );
+        if (method == HttpMethod.post) {
+          requestData = await postRequest(
+            url,
+            headers: headersMerged,
+            body: body,
+            debug: debug,
+            proxyAPI: proxyAPI,
+            proxyUrlParam: proxyUrlParam,
+            clientType: clientType,
+            consoleClientOptions: consoleClientOptions,
+            curlClientOptions: curlClientOptions,
+          );
+        } else {
+          requestData = await getRequest(
+            url,
+            headers: headersMerged,
+            debug: debug,
+            proxyAPI: proxyAPI,
+            proxyUrlParam: proxyUrlParam,
+            clientType: clientType,
+            consoleClientOptions: consoleClientOptions,
+            curlClientOptions: curlClientOptions,
+          );
+        }
       } else if (config.usePassedHtml && html != null && html.hasContent()) {
         printLog(
           'Scraper: Using user-passed html :)',
@@ -110,13 +132,30 @@ class Scraper {
         dom = Data(url, html);
       } else {
         printLog('Scraper: Fetching html...', debug, color: LogColor.blue);
-        requestData = await getRequest(
-          url,
-          headers: headersMerged,
-          debug: debug,
-          proxyAPI: proxyAPI,
-          proxyUrlParam: proxyUrlParam,
-        );
+        if (method == HttpMethod.post) {
+          requestData = await postRequest(
+            url,
+            headers: headersMerged,
+            body: body,
+            debug: debug,
+            proxyAPI: proxyAPI,
+            proxyUrlParam: proxyUrlParam,
+            clientType: clientType,
+            consoleClientOptions: consoleClientOptions,
+            curlClientOptions: curlClientOptions,
+          );
+        } else {
+          requestData = await getRequest(
+            url,
+            headers: headersMerged,
+            debug: debug,
+            proxyAPI: proxyAPI,
+            proxyUrlParam: proxyUrlParam,
+            clientType: clientType,
+            consoleClientOptions: consoleClientOptions,
+            curlClientOptions: curlClientOptions,
+          );
+        }
       }
       if (dom.obj != "") {
         printLog('Scraper: HTML fetched :)', debug, color: LogColor.green);

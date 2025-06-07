@@ -21,10 +21,12 @@ enum ParserType {
   http,
   json,
   jsonld,
+  jsonList,
   jsonTable,
   json5decode,
   staticVal,
   returnUrlParser,
+  metaTag
 }
 
 /// HTTP Methods for HttpParser
@@ -49,3 +51,6 @@ enum LogColor {
   white,
   orange
 }
+
+/// HTTP Client types supported
+enum HttpClientType { consoleClient, curlClient, browserClient }

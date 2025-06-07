@@ -41,6 +41,7 @@ class Optional {
   final HttpPayload? payloadType;
   final bool usePassedProxy;
   final bool cacheResponse;
+  final HttpClientType clientType;
 
   // StrBetween-specific fields
   final String? start;
@@ -90,6 +91,7 @@ class Optional {
     this.payloadType,
     this.usePassedProxy = false,
     this.cacheResponse = false,
+    this.clientType = HttpClientType.browserClient,
     this.start,
     this.end,
     this.where,
@@ -157,6 +159,7 @@ class Optional {
     HttpPayload? payloadType,
     bool usePassedProxy = false,
     bool cacheResponse = false,
+    HttpClientType clientType = HttpClientType.browserClient,
     // Optional common fields
     ApplyMethod? apply,
     String? regex,
@@ -184,6 +187,7 @@ class Optional {
       payloadType: payloadType,
       usePassedProxy: usePassedProxy,
       cacheResponse: cacheResponse,
+      clientType: clientType,
       apply: apply,
       regex: regex,
       regexGroup: regexGroup,
