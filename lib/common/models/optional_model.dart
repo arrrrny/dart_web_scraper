@@ -665,6 +665,7 @@ class Optional {
       apply: json['apply'] != null
           ? ApplyMethod.values.firstWhere(
               (e) => e.toString() == 'ApplyMethod.${json['apply']}',
+              orElse: () => null,
               orElse: () => ApplyMethod.defaultValue, // Replace with an appropriate default value
             )
           : null,
