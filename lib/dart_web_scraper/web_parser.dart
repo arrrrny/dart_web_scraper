@@ -273,11 +273,14 @@ class WebParser {
     );
 
     if (parsed != null) {
-      Object data = parsed.obj;
+      Object? data = parsed.obj;
 
       // Apply optional transformations
       if (parser.optional != null) {
         data = parser.optional!.applyTransformations(data, debug);
+      }
+      if (data == null) {
+        return null;
       }
 
       // Apply cleaner if defined
