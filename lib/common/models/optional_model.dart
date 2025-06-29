@@ -585,10 +585,12 @@ class Optional {
     if (data is String) {
       return extractMatch(data);
     } else if (data is List) {
+      final results = <String?>[];
       for (final item in data) {
         final result = extractMatch(item.toString());
-        if (result != null) return result;
+        if (result != null) results.add(result);
       }
+      return results;
     }
     return null;
   }
@@ -718,7 +720,9 @@ class Optional {
       where: json['where'] != null ? List<String>.from(json['where']) : null,
       siblingDirection: json['siblingDirection'] != null
           ? SiblingDirection.values.firstWhere(
-              (e) => e.toString() == 'SiblingDirection.${json['siblingDirection']}',
+              (e) =>
+                  e.toString() ==
+                  'SiblingDirection.${json['siblingDirection']}',
             )
           : null,
       keys: json['keys'],
